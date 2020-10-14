@@ -66,6 +66,7 @@ class DirectorController{
 
     //Eliminar director
     function eliminarDirector($params = null){
+        $this->autenticacionHelper->checkLoggedIn();
         //Guardo el id que recibo por parametros
         $id_director = $params[':ID'];
 
@@ -75,6 +76,7 @@ class DirectorController{
 
     //Edito un director
     function editarDirector($params = null){
+        $this->autenticacionHelper->checkLoggedIn();
         //Obtengo el id que recibo por parametro
         $director_id = $params[':ID'];
 

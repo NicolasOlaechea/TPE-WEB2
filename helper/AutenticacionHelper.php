@@ -24,7 +24,7 @@ class AutenticacionHelper{
         }
     }
     
-    private function checkLoggedIn(){
+    function checkLoggedIn(){
         session_start();
         
         if(!isset($_SESSION["EMAIL"])){

@@ -1,9 +1,18 @@
 <?php
 //Incluyo lel archivo
 require_once('./libs/smarty/Smarty.class.php');
+require_once './Helper/AutenticacionHelper.php';
 
 //Creo la clase
 class SerieView {
+
+    //Atributos
+    private $autenticacionHelper;
+
+    //Creo el constructor
+    public function __construct(){
+        $this->autenticacionHelper = new AutenticacionHelper();
+    }
 
     //Muestro el home
     function showHome($series, $directores, $usuarioLogueado){
@@ -46,6 +55,7 @@ class SerieView {
 
     //Muestro el form de editar serie
     function formEditar($serie, $directores){
+        $this->autenticacionHelper->checkLoggedIn();
         $smarty = new Smarty();
         $smarty->assign('serie', $serie);
         $smarty->assign('directores', $directores);

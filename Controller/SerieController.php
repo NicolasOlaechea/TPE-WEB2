@@ -79,6 +79,7 @@ class SerieController{
 
     //Elimino una serie
     function eliminarSerie($params = null){
+        $this->autenticacionHelper->checkLoggedIn();
         //Guardo el id que recibo por parametros y le digo al model que elimine
         $serie_id = $params[':ID'];
         $this->serieModel->eliminarSerie($serie_id);
@@ -86,6 +87,7 @@ class SerieController{
 
     //Edito una serie
     function editarSerie($params = null){
+        $this->autenticacionHelper->checkLoggedIn();
         //Obtengo todos los directores y el id que recibo por parametro
         $directores = $this->directorModel->getAllDirectores();
         $serie_id = $params[':ID'];
