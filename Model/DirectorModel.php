@@ -17,10 +17,10 @@ class DirectorModel {
     }
 
     //Agrego un director a la base de datos
-    function agregarDirector($nombre, $edad, $nacionalidad){
+    function agregarDirector($nombre_director, $edad, $nacionalidad){
         $db = $this->GetDBConnection();
-        $sentencia = $db->prepare("INSERT INTO director(nombre, edad, nacionalidad) VALUES(?,?,?)");
-        $sentencia->execute(array($nombre, $edad, $nacionalidad));
+        $sentencia = $db->prepare("INSERT INTO director(nombre_director, edad, nacionalidad) VALUES(?,?,?)");
+        $sentencia->execute(array($nombre_director, $edad, $nacionalidad));
 
         header("Location: ".BASE_URL."directores");
     }
@@ -35,10 +35,10 @@ class DirectorModel {
     }
 
     //Edito un director de la base de datos
-    function editarDirector($director_id, $nombre, $edad, $nacionalidad){
+    function editarDirector($director_id, $nombre_director, $edad, $nacionalidad){
         $db = $this->GetDBConnection();
-        $sentencia = $db->prepare("UPDATE director SET nombre=?, edad=?, nacionalidad=? WHERE id=?");
-        $sentencia->execute(array($nombre, $edad, $nacionalidad, $director_id));
+        $sentencia = $db->prepare("UPDATE director SET nombre_director=?, edad=?, nacionalidad=? WHERE id=?");
+        $sentencia->execute(array($nombre_director, $edad, $nacionalidad, $director_id));
         
         header("Location: ". BASE_URL . "home");
     }

@@ -50,15 +50,10 @@
             </thead>
             <tbody id="bodyTabla">
                 {foreach from=$series item=serie}
-                    {foreach from=$directores item=director}
-                        {if $serie->id_director == $director->id}
-                            {$nombreDirector = $director->nombre}
-                        {/if}
-                    {/foreach}
                     <tr>
-                        <td>{$serie->nombre}</td>
+                        <td>{$serie->nombre_serie}</td>
                         <td>{$serie->genero}</td>
-                        <td>{$nombreDirector}</td>
+                        <td>{$serie->nombre_director}</td>
                         {if $usuarioLogueado != null}
                             <td><button class="btnEliminar"><a href="eliminar/{$serie->id}">Eliminar</a></button></td>
                             <td><button class="btnEditar"><a href="editar/{$serie->id}">Editar</a></button></td>
@@ -79,7 +74,7 @@
                 <select name="director" id="director">
                     <option>Director</option>
                     {foreach from=$directores item=director}
-                        <option value="{$director->nombre}">{$director->nombre}</option>
+                        <option value="{$director->nombre_director}">{$director->nombre_director}</option>
                     {/foreach}
                 </select>
                 <input id="btnAgregar" type="submit" value="Agregar">

@@ -12,7 +12,7 @@
             <tbody id="bodyTabla">
                 {foreach from=$directores  item=director}
                     <tr>
-                        <td>{$director->nombre}</td>
+                        <td>{$director->nombre_director}</td>
                         <td>{$director->edad}</td>
                         <td>{$director->nacionalidad}</td>
                         {if $usuarioLogueado != null}
@@ -49,7 +49,7 @@
                 <select name="director" id="director">
                     <option>Director</option>
                     {foreach from=$directores item=director}
-                        <option value="{$director->nombre}">{$director->nombre}</option>
+                        <option value="{$director->nombre_director}">{$director->nombre_director}</option>
                     {/foreach}
                 </select>
                 <input type="submit" value="Buscar">

@@ -2,11 +2,11 @@
 
 <main class="contenido">
         <div class="divInfoSerie">
-                <h2>Informacion sobre la serie: {$serie->nombre}</h2>
+                <h2>Informacion sobre la serie: {$serie->nombre_serie}</h2>
                     <ul>
-                        <li>Nombre: {$serie->nombre}</li>
+                        <li>Nombre: {$serie->nombre_serie}</li>
                         <li>Genero: {$serie->genero}</li>
-                        <li>Director: {$nombreDirector}</li>
+                        <li>Director: {$serie->nombre_director}</li>
                     </ul>
             <a href="home">Volver</a>
         </div>       

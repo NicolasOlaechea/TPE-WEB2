@@ -55,12 +55,12 @@ class SerieController{
     //Agrego una serie
     function agregarSerie(){
         //Obtengo todas las series y todos los directores
-        $series = $this->serieModel->getAllSeries();
+        $series = $this->serieModel->getAllSeries(); //No va, no lo uso
         $directores = $this->directorModel->getAllDirectores();
 
         //Guardo los datos que ingresa el usuario
         if(isset($_POST["serie"]) && isset($_POST["genero"]) && isset($_POST["director"])){
-            $nombre = $_POST["serie"];
+            $nombre_serie = $_POST["serie"];
             $genero = $_POST["genero"];
             $nameDirector = $_POST["director"];
         }
@@ -68,13 +68,13 @@ class SerieController{
         //Recorro los directores y guardo el id del director que coincida con
         //el nombre que ingreso el usuario
         foreach($directores as $director){
-            if($nameDirector == $director->nombre){
+            if($nameDirector == $director->nombre_director){
                 $idDirector = $director->id;
             }
         }
 
         //Le digo al modelo que agregue una serie con los datos anteriores
-        $this->serieModel->agregarSerie($nombre, $genero, $idDirector);
+        $this->serieModel->agregarSerie($nombre_serie, $genero, $idDirector);
     }
 
     //Elimino una serie
@@ -102,7 +102,7 @@ class SerieController{
         //Recorro los directores y guardo el id del director que coincida con el
         //nombre que ingreso el usuario
         foreach($directores as $director){
-            if($nameDirector == $director->nombre){
+            if($nameDirector == $director->nombre_director){
                 $idDirector = $director->id;
             }
         }
@@ -118,14 +118,9 @@ class SerieController{
 
         //Le digo al model que me de la serie que coincida con el id anterior
         $serie = $this->serieModel->getSerie($serie_id);
-        $directores = $this->directorModel->getAllDirectores();
-        foreach($directores as $director){
-            if($serie->id_director == $director->id){
-                $nombreDirector = $director->nombre;
-            }
-        }
+
         //Le digo al view que muestre la serie
-        $this->view->showSerie($serie, $nombreDirector);
+        $this->view->showSerie($serie);
     }
 
     function mostrarFormEditar($params = null){

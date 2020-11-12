@@ -4,7 +4,7 @@
     <form id="formEditar" class="formEditar" action="completarEdicionDirector/{$director->id}" method="POST">
         <h2>¡Modifica tu director favorito de la tabla!</h2> 
              
-        <input value="{$director->nombre}" type="text" name="nombre" placeholder="Nombre">
+        <input value="{$director->nombre_director}" type="text" name="nombre" placeholder="Nombre">
         <input value="{$director->edad}" type="text" name="edad" placeholder="Edad">
         <input value="{$director->nacionalidad}" type="text" name="nacionalidad" placeholder="Nacionalidad">
 

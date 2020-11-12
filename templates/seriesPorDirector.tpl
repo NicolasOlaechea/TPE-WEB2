@@ -5,7 +5,7 @@
 
         {foreach from=$series item=serie}
                 <ul>
-                        <li>{$serie->nombre}</li>
+                        <li>{$serie->nombre_serie}</li>
                 </ul>
         {/foreach}
 

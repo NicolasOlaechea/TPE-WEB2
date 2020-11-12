@@ -52,7 +52,7 @@ class DirectorController{
         //Verifico si ya existia el director que ingresaron
         $esta = false;
         foreach($directores as $director){
-            if($director->nombre == $nombre){
+            if($director->nombre_director == $nombre){
                 $esta = true;
             }
         }
@@ -82,14 +82,14 @@ class DirectorController{
 
         //Guardo todos los datos que ingreso el usuario para editar el director
         if(isset($_POST["nombre"]) && isset($_POST["edad"]) && isset($_POST["nacionalidad"])){
-            $nombre = $_POST["nombre"];
+            $nombre_director = $_POST["nombre"];
             $edad = $_POST["edad"];
             $nacionalidad = $_POST["nacionalidad"];
         }
 
         //Le digo al model que edite el director con los datos anteriores
-        $this->directorModel->editarDirector($director_id, $nombre, $edad, $nacionalidad);
-        header("Location: ". BASE_URL . "directores");
+        $this->directorModel->editarDirector($director_id, $nombre_director, $edad, $nacionalidad);
+        header("Location: ". BASE_URL . "directores"); //No va
     }
 
     //Muestro series por director
@@ -105,9 +105,9 @@ class DirectorController{
         //Recorro todos los directores y guardo el id del director que coincida
         //con el nombre que ingreso el usuario
         foreach($directores as $director){
-            if($director->nombre == $nombreDirector){
+            if($director->nombre_director == $nombreDirector){
                 $id_director = $director->id;
-                $nombreDirector = $director->nombre;
+                $nombreDirector = $director->nombre_director; //No va, ya lo obtengo antes
             }
         }
         
