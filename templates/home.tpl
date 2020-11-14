@@ -43,6 +43,7 @@
         <table class="tablaEstadisticas">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Serie</th>
                     <th>Genero</th>
                     <th>Director</th>
@@ -51,6 +52,11 @@
             <tbody id="bodyTabla">
                 {foreach from=$series item=serie}
                     <tr>
+                        <td>
+                            {if $serie->imagen}
+                                <img src="images/series/{$serie->imagen}" class="imgTablaSeries">
+                            {/if}
+                        </td>
                         <td>{$serie->nombre_serie}</td>
                         <td>{$serie->genero}</td>
                         <td>{$serie->nombre_director}</td>
@@ -67,7 +73,7 @@
 
     {if $usuarioLogueado != null}
         <div>
-            <form action="agregar" method="POST" class="formTabla2019">
+            <form action="agregar" method="POST" class="formTabla2019" enctype="multipart/form-data">
                 <h2>¡Agregar tu serie favorita a la tabla!</h2>        
                 <input type="text" name="serie" placeholder="Serie">
                 <input type="text" name="genero" placeholder="Genero">
@@ -77,6 +83,7 @@
                         <option value="{$director->nombre_director}">{$director->nombre_director}</option>
                     {/foreach}
                 </select>
+                <input type="file" name="img">
                 <input id="btnAgregar" type="submit" value="Agregar">
             </form>
         </div>

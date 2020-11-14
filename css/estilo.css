@@ -222,6 +222,12 @@ form.formTabla2019 select {
     text-align: center;
 }
 
+.imgTablaSeries {
+    width: 40px;
+    border-radius: 5px;
+    border: solid 1px white;
+}
+
 /*Boton Editar*/
 .formEditar {
     display: block;
@@ -327,6 +333,15 @@ form.formTabla2019 button {
     margin: 40px auto;
     text-align: center;
     padding: 25px 15px
+}
+
+.divInfoSerie .infoDivSerie{
+    display: flex;
+    justify-content: space-around;
+}
+
+.imgSerie {
+    width: 200px;
 }
 
 .divInfoSerie ul {

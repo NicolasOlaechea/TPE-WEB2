@@ -1,7 +1,7 @@
 {include file="header.tpl"} <!--Incluyo el header-->
 
 <main class="contenido">
-    <form id="formEditar" class="formEditar" action="completarEdicion/{$serie->id}" method="POST">
+    <form id="formEditar" class="formEditar" action="completarEdicion/{$serie->id}" method="POST" enctype="multipart/form-data">
         <h2>¡Modifica una serie de la tabla!</h2> 
              
         <input value="{$serie->nombre_serie}" type="text" name="serie" placeholder="Serie">
@@ -13,6 +13,7 @@
                 <option value="{$director->nombre_director}">{$director->nombre_director}</option>
             {/foreach}
         </select>
+        <input type="file" name="img">
         <input id="submitEditar" type="submit" value="Editar">
     </form>
 </main>

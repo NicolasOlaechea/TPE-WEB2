@@ -58,6 +58,13 @@ class SerieController{
         $series = $this->serieModel->getAllSeries(); //No va, no lo uso
         $directores = $this->directorModel->getAllDirectores();
 
+        $destino = null; //44:00 lo explica
+        if(isset($_FILES['img'])){
+            $uploads = getcwd() . "/images/series";
+            $destino = tempnam($uploads, $_FILES['img']['name']);
+            move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+            $destino = basename($destino);
+        }
         //Guardo los datos que ingresa el usuario
         if(isset($_POST["serie"]) && isset($_POST["genero"]) && isset($_POST["director"])){
             $nombre_serie = $_POST["serie"];
@@ -74,7 +81,7 @@ class SerieController{
         }
 
         //Le digo al modelo que agregue una serie con los datos anteriores
-        $this->serieModel->agregarSerie($nombre_serie, $genero, $idDirector);
+        $this->serieModel->agregarSerie($nombre_serie, $genero, $idDirector, $destino);
     }
 
     //Elimino una serie
@@ -92,6 +99,14 @@ class SerieController{
         $directores = $this->directorModel->getAllDirectores();
         $serie_id = $params[':ID'];
 
+        $destino = null; //44:00 lo explica
+        if(isset($_FILES['img'])){
+            $uploads = getcwd() . "/images/series";
+            $destino = tempnam($uploads, $_FILES['img']['name']);
+            move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+            $destino = basename($destino);
+        }
+        
         //Guardo todos los datos que ingreso el usuario para editar la serie
         if(isset($_POST["serie"]) && isset($_POST["genero"]) && isset($_POST["director"])){
             $nombre = $_POST["serie"];
@@ -108,7 +123,7 @@ class SerieController{
         }
 
         //Le digo al model que edite la serie con los datos anteriores
-        $this->serieModel->editarSerie($serie_id, $nombre, $genero, $idDirector);
+        $this->serieModel->editarSerie($serie_id, $nombre, $genero, $idDirector, $destino);
     }
 
     //Muestro una serie por el ID
