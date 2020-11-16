@@ -46,9 +46,10 @@ class SerieView {
     }
 
     //Muestro los datos de una serie
-    function showSerie($serie){
+    function showSerie($serie, $puntajesDisponibles){
         $smarty = new Smarty();
         $smarty->assign('serie', $serie);
+        $smarty->assign('puntajes', $puntajesDisponibles);
         $smarty->display('templates/serie.tpl'); // muestro el template 
     }
 

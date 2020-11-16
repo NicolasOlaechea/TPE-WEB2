@@ -27,4 +27,6 @@
         </form>
     </main>
 
+<script src="js/captcha.js"></script>
+
 {include file="footer.tpl"} <!--Incluyo el footer-->

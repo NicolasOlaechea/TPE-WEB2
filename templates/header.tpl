@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cine Home</title>
     <link rel="stylesheet" href="css/estilo.css">
-    <script src="js/barraNavegacionResponsive.js"></script>
-    <script src="js/main.js"></script>
 </head>
 
 <body>

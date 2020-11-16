@@ -19,22 +19,26 @@
                 </div>
             </div>
             <div class="contenedorComentarios">
-                <form action="agregarComentario" method="POST" class="formTabla2019">
+                <form id="formComentarios" action="agregarComentario" method="POST" class="formTabla2019">
                     <h2>¡Agrega un comentario a la serie!</h2>        
-                    <input type="text" name="contenido" placeholder="Escribir comentario">
+                    <input type="text" id="contenido" name="contenido" placeholder="Escribir comentario">
                     <select name="puntaje" id="puntaje">
                         <option>Puntaje</option>
-                        {foreach from=$valores item=valor}
-                            <option value="{$valor}">{$valor}</option>
+                        {foreach from=$puntajes item=puntaje}
+                            <option value="{$puntaje}">{$puntaje}</option>
                         {/foreach}
                     </select>
                     <input id="btnAgregar" type="submit" value="Agregar">
                 </form>
             </div>
-            <div id="divComentarios" class="divComentarios">
+            <div data-id-serie="{$serie->id}" id="divComentarios" class="divComentarios">
+                <ul id="listaComentarios" class="listaComentarios">
 
+                </ul>
             </div>
         </div>       
 </main>
+
+<script src="./js/comentarios.js"></script>
 
 {include file="footer.tpl"} <!--Incluyo el footer-->

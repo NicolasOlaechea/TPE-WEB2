@@ -133,9 +133,12 @@ class SerieController{
 
         //Le digo al model que me de la serie que coincida con el id anterior
         $serie = $this->serieModel->getSerie($serie_id);
-
+        $puntajesDisponibles = [];
+        for($i=1; $i<=5; $i++){
+            array_push($puntajesDisponibles, $i);
+        }
         //Le digo al view que muestre la serie
-        $this->view->showSerie($serie);
+        $this->view->showSerie($serie, $puntajesDisponibles);
     }
 
     function mostrarFormEditar($params = null){

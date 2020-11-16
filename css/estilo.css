@@ -363,6 +363,16 @@ form.formTabla2019 button {
     border-radius: 5px;
 }
 
+/*DIV COMENTARIOS*/
+.listaComentarios li {
+    border: solid 2px black;
+    width: 100%;
+    min-height: 8px;
+    margin: 3px 0;
+    background-color: white;
+
+}
+
 .buscarSeriesPorDirector {
     width: 80%;
     border: solid 2px white;
