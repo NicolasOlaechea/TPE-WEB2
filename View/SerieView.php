@@ -37,19 +37,13 @@ class SerieView {
         $smarty = new Smarty();
         $smarty->display('templates/series.tpl'); // muestro el template
     }
-        
-    //Muestro la seccion registro
-    function showRegistro(){
-        // inicializo Smarty y asigno las variables para mostrar
-        $smarty = new Smarty();
-        $smarty->display('templates/registro.tpl'); // muestro el template
-    }
 
     //Muestro los datos de una serie
-    function showSerie($serie, $puntajesDisponibles){
+    function showSerie($serie, $puntajesDisponibles, $usuarioLogueado){
         $smarty = new Smarty();
         $smarty->assign('serie', $serie);
         $smarty->assign('puntajes', $puntajesDisponibles);
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->display('templates/serie.tpl'); // muestro el template 
     }
 

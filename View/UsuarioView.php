@@ -10,4 +10,19 @@ class UsuarioView {
         $smarty->assign('mensaje', $mensaje);
         $smarty->display('templates/login.tpl'); // muestro el template   
     }
+
+    //Muestro la seccion registro
+    function showRegistro($mensaje = ""){
+        // inicializo Smarty y asigno las variables para mostrar
+        $smarty = new Smarty();
+        $smarty->assign('mensaje', $mensaje);
+        $smarty->display('templates/registro.tpl'); // muestro el template
+    }
+
+    function showUsuarios($usuarios, $usuarioLogueado){
+        $smarty = new Smarty();
+        $smarty->assign('usuarios', $usuarios);
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
+        $smarty->display('templates/usuarios.tpl');
+    }
 }

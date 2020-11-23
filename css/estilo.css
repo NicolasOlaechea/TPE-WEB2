@@ -398,7 +398,43 @@ form.formTabla2019 button {
     
 }
 
+/*SWITCH para la lista de usuarios*/
+.lbl {
+    display: inline-block;
+    width: 65px;
+    height: 33px;
+    background: #ffffff;
+    border-radius: 100px;
+    border: solid 2px black;
+    cursor: pointer;
+    position: relative;
+    transition: .2s;
+}
 
+.lbl::after {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: rgb(0, 0, 0);
+    border-radius: 100px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    transition: .2s;
+}
+
+#switch:checked + .lbl::after {
+    left: 36px;
+}
+
+#switch:checked + .lbl {
+    background: #47ff9a;
+}
+
+#switch {
+    display: none;
+}
 
 
 

@@ -9,6 +9,7 @@
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
     define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
     define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
+    define("USUARIOS", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/usuarios');
     
     $r = new Router();
 
@@ -31,15 +32,17 @@
     $r->addRoute("completarEdicionDirector/:ID", "POST", "DirectorController", "editarDirector"); //EDITAR
     //Usuarios:
     $r->addRoute("agregarUsuario", "POST", "UsuarioController", "agregarUsuario");
+    $r->addRoute("registro", "GET", "UsuarioController", "mostrarRegistro");
     $r->addRoute("login", "GET", "UsuarioController", "showLogin");
     $r->addRoute("verificarUsuario", "POST", "UsuarioController", "verificarUsuario");
     $r->addRoute("logout", "GET", "UsuarioController", "Logout");
+    $r->addRoute("usuarios", "GET", "UsuarioController", "mostrarUsuarios");
+    $r->addRoute("cambiarRol/:ID", "GET", "UsuarioController", "cambiarRol");
+    $r->addRoute("eliminarUsuario/:ID", "GET", "UsuarioController", "eliminarUsuario");
     //Peliculas index
     $r->addRoute("peliculas", "GET", "SerieController", "mostrarPeliculas");
     //Series index
     $r->addRoute("series", "GET", "SerieController", "mostrarSeries");
-    //Registro index
-    $r->addRoute("registro", "GET", "SerieController", "mostrarRegistro");
 
     //Ruta por defecto.
     $r->setDefaultRoute("SerieController", "mostrarHome");

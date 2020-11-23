@@ -20,13 +20,34 @@ class UsuarioController{
 
     //Agrego usuario
     function agregarUsuario(){
+        $existe = false;
+        $usuarios = $this->usuarioModel->getUsuarios();
+  
         if(isset($_POST["email"]) && isset($_POST["password"])){
             $email = $_POST["email"];
             $password = $_POST["password"];
         }
+        
+        foreach($usuarios as $usuario){
+            if($usuario->email == $email){
+                $existe = true;
+            }
+        }
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $this->usuarioModel->agregarUsuario($email, $hash);
+        if($existe == false){
+            $this->usuarioModel->agregarUsuario($email, $hash);
+            $this->verificarUsuario();    
+        }else{
+            $this->usuarioView->showRegistro("Ya existe un usuario con el mismo email");
+        }
+        
+    }
+
+    
+    //Muestro la seccion del registro
+    function mostrarRegistro(){
+        $this->usuarioView->showRegistro();
     }
 
     //Muestro el login
@@ -66,4 +87,28 @@ class UsuarioController{
         header("Location: ".LOGIN);
     }
 
+    function mostrarUsuarios(){
+        $usuarios = $this->usuarioModel->getUsuarios();
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+        $this->usuarioView->showUsuarios($usuarios, $usuarioLogueado);
+    }
+
+    function cambiarRol($params = null){
+        $idUsuario = $params[":ID"];
+        $usuario = $this->usuarioModel->getUsuarioPorID($idUsuario);
+        $rol = null;
+        if($usuario->rol == "administrador"){
+            $rol = null;
+        }else{
+            $rol = "administrador";
+        }
+        $this->usuarioModel->cambiarRol($idUsuario, $rol);
+        header("Location: ".USUARIOS);
+    }
+
+    function eliminarUsuario($params = null){
+        $idUsuario = $params[":ID"];
+        $this->usuarioModel->eliminarUsuario($idUsuario);
+        header("Location: ".USUARIOS);
+    }
 }

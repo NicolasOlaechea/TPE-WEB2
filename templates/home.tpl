@@ -1,5 +1,11 @@
 {include file="header.tpl"} <!--Incluyo el header-->
 
+{if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
+<div>
+    <a href="usuarios"><li>Usuarios</li></a>
+</div>
+{/if}
+
 <main class="contenido">
         <section class="seccionesPeliculasSeries">
             <article class="seccion">

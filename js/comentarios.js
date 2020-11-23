@@ -2,8 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", function(){
     getComentarios();
-    
-    document.querySelector("#formComentarios").addEventListener("submit", agregarComentario);
+    if(document.querySelector("#formComentarios") != null)
+        document.querySelector("#formComentarios").addEventListener("submit", agregarComentario);
 
     
 })
@@ -26,6 +26,7 @@ function getComentarios(){
 function mostrarComentarios(comentarios){
     let contenedor = document.querySelector("#listaComentarios");
     let idSerie = document.querySelector("#divComentarios").getAttribute("data-id-serie");
+    let rolUsuario = document.querySelector("#divComentarios").getAttribute("data-rol-usuario");
     contenedor.innerHTML = "";
     for(let comentario of comentarios){
         if(comentario.id_serie == idSerie){
@@ -42,7 +43,9 @@ function mostrarComentarios(comentarios){
             button.classList.add("btnEliminar");
 
             contenedor.appendChild(li);
-            li.appendChild(button);
+            if(rolUsuario == "administrador"){
+                li.appendChild(button);
+            }
 
             //Le asigno el evento al boton para eliminar un comentario
             button.addEventListener("click", function(){
@@ -62,7 +65,7 @@ function agregarComentario(event){
         contenido: document.querySelector("#contenido").value,
         puntaje: document.querySelector("#puntaje").value,
         id_serie: document.querySelector("#divComentarios").getAttribute("data-id-serie"),
-        id_usuario: 1
+        id_usuario: document.querySelector("#divComentarios").getAttribute("data-id-usuario")
     }
 
     fetch("api/comentarios", {

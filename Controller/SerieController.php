@@ -45,11 +45,6 @@ class SerieController{
         $this->view->showSeries();
     }
 
-    //Muestro la seccion del registro
-    function mostrarRegistro(){
-        $this->view->showRegistro();
-    }
-
     //SERIES (ITEM)------------------------------------------------------------
 
     //Agrego una serie
@@ -137,8 +132,11 @@ class SerieController{
         for($i=1; $i<=5; $i++){
             array_push($puntajesDisponibles, $i);
         }
+
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+
         //Le digo al view que muestre la serie
-        $this->view->showSerie($serie, $puntajesDisponibles);
+        $this->view->showSerie($serie, $puntajesDisponibles, $usuarioLogueado);
     }
 
     function mostrarFormEditar($params = null){
