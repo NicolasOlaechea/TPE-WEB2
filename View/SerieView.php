@@ -48,11 +48,12 @@ class SerieView {
     }
 
     //Muestro el form de editar serie
-    function formEditar($serie, $directores){
+    function formEditar($serie, $directores, $usuarioLogueado){
         $this->autenticacionHelper->checkLoggedIn();
         $smarty = new Smarty();
         $smarty->assign('serie', $serie);
         $smarty->assign('directores', $directores);
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->display('templates/editar.tpl'); // muestro el template 
     }
     

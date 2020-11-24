@@ -59,7 +59,7 @@
                 {foreach from=$series item=serie}
                     <tr>
                         <td>
-                            {if $serie->imagen}
+                            {if $serie->imagen != null}
                                 <img src="images/series/{$serie->imagen}" class="imgTablaSeries">
                             {/if}
                         </td>
@@ -89,7 +89,9 @@
                         <option value="{$director->nombre_director}">{$director->nombre_director}</option>
                     {/foreach}
                 </select>
-                <input type="file" name="img">
+                {if $usuarioLogueado->rol == "administrador"}
+                    <input type="file" name="img">
+                {/if}
                 <input id="btnAgregar" type="submit" value="Agregar">
             </form>
         </div>

@@ -84,6 +84,9 @@ class SerieController{
         $this->autenticacionHelper->checkLoggedIn();
         //Guardo el id que recibo por parametros y le digo al model que elimine
         $serie_id = $params[':ID'];
+        $serie = $this->serieModel->getSerie($serie_id);
+        
+        unlink('images/series/'.$serie->imagen);
         $this->serieModel->eliminarSerie($serie_id);
     }
 
@@ -134,7 +137,7 @@ class SerieController{
         }
 
         $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
-
+        
         //Le digo al view que muestre la serie
         $this->view->showSerie($serie, $puntajesDisponibles, $usuarioLogueado);
     }
@@ -142,13 +145,14 @@ class SerieController{
     function mostrarFormEditar($params = null){
         //Guardo el id que recibo por parametros
         $idSerie = $params[':ID'];
-
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+        
         //Le pido al model la serie con el id anterior y todos los directores
         $serie = $this->serieModel->getSerie($idSerie);
         $directores = $this->directorModel->getAllDirectores();
 
         //Le digo al view que muestre el form de editar
-        $this->view->formEditar($serie, $directores);
+        $this->view->formEditar($serie, $directores, $usuarioLogueado);
     }
 
 }

@@ -14,7 +14,10 @@ class AutenticacionHelper{
 
     //Obtengo el usuario que esta logueado actualmente
     function usuarioLogueado(){
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE){
+            session_start();
+        }
+        
         if(isset($_SESSION['EMAIL'])){
             $email = $_SESSION['EMAIL'];
             $usuarioActual = $this->usuarioModel->getUsuario($email);
@@ -25,7 +28,9 @@ class AutenticacionHelper{
     }
     
     function checkLoggedIn(){
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE){
+            session_start();
+        }
         
         if(!isset($_SESSION["EMAIL"])){
             header("Location: ". LOGIN);
@@ -35,9 +40,7 @@ class AutenticacionHelper{
                 header("Location: ". LOGOUT);
                 die();
             } 
-        
             $_SESSION['LAST_ACTIVITY'] = time();
-
         }
     }
 }

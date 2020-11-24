@@ -13,7 +13,9 @@
                 <option value="{$director->nombre_director}">{$director->nombre_director}</option>
             {/foreach}
         </select>
-        <input type="file" name="img">
+        {if $usuarioLogueado->rol == "administrador"}
+            <input type="file" name="img">
+        {/if}
         <input id="submitEditar" type="submit" value="Editar">
     </form>
 </main>
