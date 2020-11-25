@@ -76,6 +76,17 @@
             </tbody>
         </table>
         </div>
+        <div class="div-navegacion">
+            <nav class="nav-paginacion">
+                <ul class="paginacion">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        {for $i=1 to $cantPaginas}
+                            <li class="page-item"><a class="page-link" href="home/{$i}">{$i}</a></li>
+                        {/for}
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
 
     {if $usuarioLogueado != null}
         <div>

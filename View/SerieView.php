@@ -15,12 +15,13 @@ class SerieView {
     }
 
     //Muestro el home
-    function showHome($series, $directores, $usuarioLogueado){
+    function showHome($series, $directores, $usuarioLogueado, $cantPaginas){
         // inicializo Smarty y asigno las variables para mostrar
         $smarty = new Smarty();
         $smarty->assign('series', $series);
         $smarty->assign('directores', $directores);
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
+        $smarty->assign('cantPaginas', $cantPaginas);
         $smarty->display('templates/home.tpl'); // muestro el template   
     }
 

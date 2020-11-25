@@ -15,8 +15,10 @@
 
     // RUTAS:
     //Home index
+    $r->addRoute("home/:ID", "GET", "SerieController", "mostrarHome"); //HOME
+    $r->addRoute("Home/:ID", "GET", "SerieController", "mostrarHome"); //HOME
     $r->addRoute("home", "GET", "SerieController", "mostrarHome"); //HOME
-    $r->addRoute("Home", "GET", "SerieController", "mostrarHome"); //HOME
+    
     //Series: agregar, eliminar, editar, verSerie
     $r->addRoute("agregar", "POST", "SerieController", "agregarSerie"); //AGREGAR
     $r->addRoute("eliminar/:ID", "GET", "SerieController", "eliminarSerie"); //ELIMINAR

@@ -14,6 +14,13 @@ class SerieModel {
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
+    function getSeriesPorLimite($inicio, $cantidad){
+        $db = $this->GetDBConnection();
+        $sentencia = $db->prepare("SELECT `serie`.`id`, `serie`.`nombre_serie`, `serie`.`genero`, `serie`.`imagen`, `serie`.`id_director`, `director`.`nombre_director`  FROM `serie` INNER JOIN `director` ON `serie`.`id_director` = `director`.`id` ORDER BY `serie`.`id` LIMIT $inicio, $cantidad");
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
     
     //Agrego una serie a la base de datos
     function agregarSerie($nombre_serie, $genero, $id_director, $imagen){

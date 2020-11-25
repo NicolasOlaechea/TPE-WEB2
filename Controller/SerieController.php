@@ -25,12 +25,24 @@ class SerieController{
     }
 
     //Muestro el home
-    function mostrarHome(){
+    function mostrarHome($params = null){
+        if($params){
+            $pagina = $params[':ID'];
+        }
         //$this->checkLoggedIn();
         $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
         $series = $this->serieModel->getAllSeries();
         $directores = $this->directorModel->getAllDirectores();
-        $this->view->showHome($series, $directores, $usuarioLogueado);
+    
+        $elementosPorPagina = 3;
+        $cantPaginas = ceil(count($series)/$elementosPorPagina);
+        if((!$params) || ($params[':ID'] <1) || ($params[':ID'] > $cantPaginas)){
+            $pagina = 1;
+        }
+
+        $inicio = ($pagina-1)*$elementosPorPagina;
+        $seriesPorLimite = $this->serieModel->getSeriesPorLimite($inicio, 3);
+        $this->view->showHome($seriesPorLimite, $directores, $usuarioLogueado, $cantPaginas);
     }
 
     //Muestro la seccion de peliculas

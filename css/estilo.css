@@ -437,10 +437,42 @@ form.formTabla2019 button {
 }
 
 
+/*Botonera para la paginacion de las series*/
+.div-navegacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-left: 70px;
+}
 
+.nav-paginacion {
+    width: 40%;
+}
+.nav-paginacion ul{
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    background-color: white;
+    border: solid 2px black;
+    padding: 5px 50px 5px 45px;
+    border-radius: 10px;
+}
 
+.nav-paginacion ul li{
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    
+}
 
+.nav-paginacion ul li:hover{
+    background-color: blue;
+    color: white;
 
+}
 
 
 /*Footer*/
