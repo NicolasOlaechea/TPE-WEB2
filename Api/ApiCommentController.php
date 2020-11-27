@@ -16,6 +16,12 @@ class ApiCommentController extends ApiController{
         $this->view->response($comentarios, 200);
     }
 
+    function getComentariosPorSerie($params = null){
+        $id_serie = $params[':ID'];
+        $comentarios = $this->model->getComentariosPorSerie($id_serie);
+        $this->view->response($comentarios, 200);
+    }
+
     function getComentario($params = null){
         $id = $params[':ID'];
         $comentario = $this->model->getComentario($id);

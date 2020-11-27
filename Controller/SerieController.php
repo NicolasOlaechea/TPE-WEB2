@@ -36,13 +36,13 @@ class SerieController{
     
         $elementosPorPagina = 3;
         $cantPaginas = ceil(count($series)/$elementosPorPagina);
-        if((!$params) || ($params[':ID'] <1) || ($params[':ID'] > $cantPaginas)){
+        if((!$params) || ($params[':ID'] <1) || ($params[':ID'] > $cantPaginas) || empty($params)){
             $pagina = 1;
         }
 
         $inicio = ($pagina-1)*$elementosPorPagina;
         $seriesPorLimite = $this->serieModel->getSeriesPorLimite($inicio, 3);
-        $this->view->showHome($seriesPorLimite, $directores, $usuarioLogueado, $cantPaginas);
+        $this->view->showHome($seriesPorLimite, $directores, $usuarioLogueado, $cantPaginas, $pagina);
     }
 
     //Muestro la seccion de peliculas
@@ -108,13 +108,21 @@ class SerieController{
         //Obtengo todos los directores y el id que recibo por parametro
         $directores = $this->directorModel->getAllDirectores();
         $serie_id = $params[':ID'];
+        $serie = $this->serieModel->getSerie($serie_id);
+        unlink('images/series/'.$serie->imagen);
 
         $destino = null; //44:00 lo explica
         if(isset($_FILES['img'])){
-            $uploads = getcwd() . "/images/series";
-            $destino = tempnam($uploads, $_FILES['img']['name']);
-            move_uploaded_file($_FILES['img']['tmp_name'], $destino);
-            $destino = basename($destino);
+            if($_FILES['img']['name'] != ''){
+                $uploads = getcwd() . "/images/series";
+                $destino = tempnam($uploads, $_FILES['img']['name']);
+                move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+                $destino = basename($destino);
+            }
+            
+            if($_FILES['img']['name'] == ''){
+                $destino = null;
+            }
         }
         
         //Guardo todos los datos que ingreso el usuario para editar la serie
@@ -131,9 +139,8 @@ class SerieController{
                 $idDirector = $director->id;
             }
         }
-
-        //Le digo al model que edite la serie con los datos anteriores
-        $this->serieModel->editarSerie($serie_id, $nombre, $genero, $idDirector, $destino);
+        
+        $this->serieModel->editarSerie($serie_id, $nombre, $genero, $idDirector, $destino);  
     }
 
     //Muestro una serie por el ID

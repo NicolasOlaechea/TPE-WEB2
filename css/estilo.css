@@ -398,45 +398,19 @@ form.formTabla2019 button {
     
 }
 
-/*SWITCH para la lista de usuarios*/
-.lbl {
-    display: inline-block;
-    width: 65px;
-    height: 33px;
-    background: #ffffff;
-    border-radius: 100px;
-    border: solid 2px black;
-    cursor: pointer;
-    position: relative;
-    transition: .2s;
+/*Div del boton para administrar usuarios en el home*/
+.div-usuarios-admin {
+    width: 90%;
+    border-radius: 20px;
+    margin: 0 auto;
+    background-color: white;
+    text-align: center;
 }
 
-.lbl::after {
-    content: '';
-    display: block;
-    width: 25px;
-    height: 25px;
-    background: rgb(0, 0, 0);
-    border-radius: 100px;
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    transition: .2s;
+.div-usuarios-admin a {
+    text-decoration: none;
+    font-weight: bold;
 }
-
-#switch:checked + .lbl::after {
-    left: 36px;
-}
-
-#switch:checked + .lbl {
-    background: #47ff9a;
-}
-
-#switch {
-    display: none;
-}
-
-
 /*Botonera para la paginacion de las series*/
 .div-navegacion {
     display: flex;
@@ -469,11 +443,14 @@ form.formTabla2019 button {
 }
 
 .nav-paginacion ul li:hover{
-    background-color: blue;
+    background-color: rgb(0, 131, 175);
     color: white;
 
 }
 
+.nav-paginacion ul li.seleccionado {
+    background-color: rgb(0, 131, 175);
+}
 
 /*Footer*/
 .footer {

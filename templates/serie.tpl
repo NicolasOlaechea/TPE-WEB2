@@ -9,6 +9,7 @@
                     <li>Nombre: {$serie->nombre_serie}</li>
                     <li>Genero: {$serie->genero}</li>
                     <li>Director: {$serie->nombre_director}</li>
+                    <li>Puntuacion promedio: <span id="puntuacionPromedio"></span></li>
                 </ul>
                 <a href="home">Volver</a>
             </div>
@@ -39,6 +40,7 @@
         data-rol-usuario="{$usuarioLogueado->rol}"
         {/if}
         >
+            <h2>Comentarios:</h2>
             <ul id="listaComentarios" class="listaComentarios">
 
             </ul>

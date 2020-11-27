@@ -50,11 +50,9 @@ class CommentModel{
     //Obtengo comentarios por serie
     function getComentariosPorSerie($id_serie){
         $db = $this->GetDBConnection();
-        $sentencia = $db->prepare("SELECT * FROM comentarios WHERE id_serie=?");
-        $sentencia->execute(array($id_director));
+        $sentencia = $db->prepare("SELECT * FROM comentario WHERE id_serie=?");
+        $sentencia->execute(array($id_serie));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
-
-        header("Location: ". BASE_URL . "home");
     }
 
 

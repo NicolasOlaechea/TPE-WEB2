@@ -1,8 +1,8 @@
 {include file="header.tpl"} <!--Incluyo el header-->
 
 {if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
-<div>
-    <a href="usuarios"><li>Usuarios</li></a>
+<div class="div-usuarios-admin">
+    <a href="usuarios">Administrar usuarios</a>
 </div>
 {/if}
 
@@ -66,7 +66,7 @@
                         <td>{$serie->nombre_serie}</td>
                         <td>{$serie->genero}</td>
                         <td>{$serie->nombre_director}</td>
-                        {if $usuarioLogueado != null}
+                        {if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
                             <td><button class="btnEliminar"><a href="eliminar/{$serie->id}">Eliminar</a></button></td>
                             <td><button class="btnEditar"><a href="editar/{$serie->id}">Editar</a></button></td>
                         {/if}    
@@ -79,11 +79,15 @@
         <div class="div-navegacion">
             <nav class="nav-paginacion">
                 <ul class="paginacion">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    {if $pagina>1}
+                        <li class="page-item-action" disabled><a disabled class="page-link" href="home/{$pagina-1}">Atras</a></li>
+                    {/if}
                         {for $i=1 to $cantPaginas}
-                            <li class="page-item"><a class="page-link" href="home/{$i}">{$i}</a></li>
+                            <li class="page-item {if $i==$pagina}seleccionado{/if}"><a class="page-link" href="home/{$i}">{$i}</a></li>
                         {/for}
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    {if $pagina<4}
+                        <li class="page-item-action"><a class="page-link" href="home/{$pagina+1}">Siguiente</a></li>
+                    {/if}
                 </ul>
             </nav>
         </div>

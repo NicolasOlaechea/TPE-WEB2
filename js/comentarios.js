@@ -22,12 +22,41 @@ function getComentarios(){
         })
 }
 
+//Obtengo todos los comentarios de la API y los muestro
+function getComentariosPorSerie(id_serie){
+    fetch("api/serie/"+id_serie+"/comentarios")
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(comentarios){
+            return comentarios;
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+}
+
+function getPuntuacionPromedioPorSerie(id_serie){
+    let comentarios = getComentariosPorSerie(id_serie);
+    let suma = 0;
+    for(let i=0; i<comentarios.length; i++){
+        suma += parseInt(comentarios[i].puntaje);
+    }
+    return suma/comentarios.length;
+}
+
 //Muestro los comentarios que obtengo de la API
 function mostrarComentarios(comentarios){
     let contenedor = document.querySelector("#listaComentarios");
     let idSerie = document.querySelector("#divComentarios").getAttribute("data-id-serie");
     let rolUsuario = document.querySelector("#divComentarios").getAttribute("data-rol-usuario");
     contenedor.innerHTML = "";
+    let suma = 0;
+    for(let c of comentarios){
+        suma += parseInt(c.puntaje);
+    }
+    let promedio = suma/comentarios.length;
+    document.querySelector("#puntuacionPromedio").innerHTML = promedio.toFixed(1);
     for(let comentario of comentarios){
         if(comentario.id_serie == idSerie){
             //Creo un li(donde va el contenido del comentario), un button
@@ -56,6 +85,7 @@ function mostrarComentarios(comentarios){
             })
         }
     }
+
 }
 
 //Agrego un comentario haciendo un POST con los valores de los inputs y luego actualizo
