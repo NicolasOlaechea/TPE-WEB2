@@ -45,36 +45,43 @@
     -TABLA con las estadisticas del año 2020-->
     <aside class="estadisticas">
         <h2 class="tituloSecciones">Las mas elegidas en el 2020</h2>
+        <div class="formBuscarSerie">
+            <form action="buscarSerie" method="POST" class="formTabla2019">
+                <h2>Buscar serie</h2>        
+                <input type="text" name="serie" placeholder="Buscar serie">
+                <input id="btnBuscar" type="submit" value="Buscar">
+            </form>
+        </div>
         <div class="divTabla">
-        <table class="tablaEstadisticas">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Serie</th>
-                    <th>Genero</th>
-                    <th>Director</th>
-                </tr>
-            </thead>
-            <tbody id="bodyTabla">
-                {foreach from=$series item=serie}
+            <table class="tablaEstadisticas">
+                <thead>
                     <tr>
-                        <td>
-                            {if $serie->imagen != null}
-                                <img src="images/series/{$serie->imagen}" class="imgTablaSeries">
-                            {/if}
-                        </td>
-                        <td>{$serie->nombre_serie}</td>
-                        <td>{$serie->genero}</td>
-                        <td>{$serie->nombre_director}</td>
-                        {if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
-                            <td><button class="btnEliminar"><a href="eliminar/{$serie->id}">Eliminar</a></button></td>
-                            <td><button class="btnEditar"><a href="editar/{$serie->id}">Editar</a></button></td>
-                        {/if}    
-                        <td><a class="btnVerMas" href="verSerie/{$serie->id}">Ver Mas</a></td>
+                        <th></th>
+                        <th>Serie</th>
+                        <th>Genero</th>
+                        <th>Director</th>
                     </tr>
-                {/foreach}
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="bodyTabla">
+                    {foreach from=$series item=serie}
+                        <tr>
+                            <td>
+                                {if $serie->imagen != null}
+                                    <img src="images/series/{$serie->imagen}" class="imgTablaSeries">
+                                {/if}
+                            </td>
+                            <td>{$serie->nombre_serie}</td>
+                            <td>{$serie->genero}</td>
+                            <td>{$serie->nombre_director}</td>
+                            {if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
+                                <td><button class="btnEliminar"><a href="eliminar/{$serie->id}">Eliminar</a></button></td>
+                                <td><button class="btnEditar"><a href="editar/{$serie->id}">Editar</a></button></td>
+                            {/if}    
+                            <td><a class="btnVerMas" href="verSerie/{$serie->id}">Ver Mas</a></td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
         </div>
         <div class="div-navegacion">
             <nav class="nav-paginacion">

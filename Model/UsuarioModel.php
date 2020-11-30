@@ -53,7 +53,7 @@ class UsuarioModel {
 
     function eliminarUsuario($id){
         $db = $this->GetDBConnection();
-        $sentencia = $db->prepare("DELETE FROM usuario WHERE id=?");
+        $sentencia = $db->prepare("DELETE FROM usuario WHERE id=? ON DELETE CASCADE");
         $sentencia->execute(array($id));
         
         header("Location: ". BASE_URL . "usuarios");

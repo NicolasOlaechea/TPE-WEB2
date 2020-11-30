@@ -50,7 +50,7 @@ class CommentModel{
     //Obtengo comentarios por serie
     function getComentariosPorSerie($id_serie){
         $db = $this->GetDBConnection();
-        $sentencia = $db->prepare("SELECT * FROM comentario WHERE id_serie=?");
+        $sentencia = $db->prepare("SELECT `comentario`.`id`, `comentario`.`contenido`, `comentario`.`puntaje`, `comentario`.`id_serie`, `usuario`.`email` FROM comentario INNER JOIN `usuario` ON `comentario`.`id_usuario` = `usuario`.`id` WHERE id_serie=?");
         $sentencia->execute(array($id_serie));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }

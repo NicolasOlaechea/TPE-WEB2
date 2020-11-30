@@ -1,16 +1,19 @@
 "use strict"
 
 document.addEventListener("DOMContentLoaded", function(){
-    getComentarios();
+    //Cuando carga la pagina:
+    //Obtengo el ID de la serie seleccionada 
+    //Llamo a la funcion getComentarios()
+    //Le asigno el evento al formulario de agregar comentarios
+    let idSerie = document.querySelector("#divComentarios").getAttribute("data-id-serie");
+    getComentariosPorSerie(idSerie);
     if(document.querySelector("#formComentarios") != null)
         document.querySelector("#formComentarios").addEventListener("submit", agregarComentario);
-
-    
 })
 
-//Obtengo todos los comentarios de la API y los muestro
-function getComentarios(){
-    fetch("api/comentarios")
+//Obtengo todos los comentarios de una serie haciendo un POST a la API y los muestro
+function getComentariosPorSerie(id_serie){
+    fetch("api/serie/"+id_serie+"/comentarios")
         .then(function(response){
             return response.json();
         })
@@ -19,58 +22,44 @@ function getComentarios(){
         })
         .catch(function(error){
             console.log(error);
-        })
-}
-
-//Obtengo todos los comentarios de la API y los muestro
-function getComentariosPorSerie(id_serie){
-    fetch("api/serie/"+id_serie+"/comentarios")
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(comentarios){
-            return comentarios;
-        })
-        .catch(function(error){
-            console.log(error);
         });
-}
-
-function getPuntuacionPromedioPorSerie(id_serie){
-    let comentarios = getComentariosPorSerie(id_serie);
-    let suma = 0;
-    for(let i=0; i<comentarios.length; i++){
-        suma += parseInt(comentarios[i].puntaje);
-    }
-    return suma/comentarios.length;
 }
 
 //Muestro los comentarios que obtengo de la API
 function mostrarComentarios(comentarios){
+    //Obtengo la lista vacia, el id de la serie seleccionada y el rol del usuario actual
     let contenedor = document.querySelector("#listaComentarios");
     let idSerie = document.querySelector("#divComentarios").getAttribute("data-id-serie");
     let rolUsuario = document.querySelector("#divComentarios").getAttribute("data-rol-usuario");
     contenedor.innerHTML = "";
     let suma = 0;
     for(let c of comentarios){
-        suma += parseInt(c.puntaje);
+        suma += parseInt(c.puntaje); //Sumo todos los puntajes de los comentarios
     }
-    let promedio = suma/comentarios.length;
+
+    let promedio = 0;
+    if(comentarios.length != 0){
+        promedio = suma/comentarios.length; //Calculo el promedio
+    }
+    
     document.querySelector("#puntuacionPromedio").innerHTML = promedio.toFixed(1);
     for(let comentario of comentarios){
         if(comentario.id_serie == idSerie){
-            //Creo un li(donde va el contenido del comentario), un button
-            // y los agrego al ul
+            //Creo un li(donde va el contenido del comentario)
             let li = document.createElement("li");
             li.innerHTML = comentario.contenido + " - "+ comentario.puntaje + " - " + comentario.email;
             
+            //Creo un boton eliminar
             let button = document.createElement("button");
             button.innerHTML = "Eliminar";
+
+            //Creo un atributo y lo asingo al boton, su valor es el id del comentario
             let a = document.createAttribute("data-id-comentario");
             a.value = comentario.id;
             button.setAttribute("data-id-comentario", a.value);
             button.classList.add("btnEliminar");
 
+            //Le agrego a la lista vacia todos los elementos que cree anteriormente
             contenedor.appendChild(li);
             if(rolUsuario == "administrador"){
                 li.appendChild(button);
@@ -78,9 +67,7 @@ function mostrarComentarios(comentarios){
 
             //Le asigno el evento al boton para eliminar un comentario
             button.addEventListener("click", function(){
-                //console.log(this.class);
                 let id_comentario = this.getAttribute("data-id-comentario");
-                console.log(id_comentario);
                 eliminarComentario(id_comentario);
             })
         }
@@ -91,6 +78,8 @@ function mostrarComentarios(comentarios){
 //Agrego un comentario haciendo un POST con los valores de los inputs y luego actualizo
 function agregarComentario(event){
     event.preventDefault();
+
+    //Obtengo los datos ingresados por el usuario
     const body = {
         contenido: document.querySelector("#contenido").value,
         puntaje: document.querySelector("#puntaje").value,
@@ -109,7 +98,8 @@ function agregarComentario(event){
         return response.json;
     })
     .then(function(comentario){
-        getComentarios();
+        let idSerie = document.querySelector("#divComentarios").getAttribute("data-id-serie");
+        getComentariosPorSerie(idSerie);
     })
     .catch(function(error){
         console.log(error);
@@ -125,8 +115,8 @@ function eliminarComentario(id_comentario){
         return response.json();
     })
     .then(function(json){
-        console.log(json);
-        getComentarios();
+        let idSerie = document.querySelector("#divComentarios").getAttribute("data-id-serie");
+        getComentariosPorSerie(idSerie);
     })
     .catch(function(error){
         console.log(error);

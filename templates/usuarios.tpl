@@ -34,9 +34,11 @@
                     </tr>
                 {/if}
             {/foreach}
-    
         </tbody>
     </table>
+    <div class="mensajeEliminarDirector">
+        <h4>*No se pueden eliminar usuarios que hayan hecho comentarios en una o mas series*</h3>
+    </div>
 </div>
 
 {include file="footer.tpl"} <!--Incluyo el footer-->

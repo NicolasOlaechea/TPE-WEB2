@@ -25,6 +25,7 @@
     $r->addRoute("editar/:ID", "GET", "SerieController", "mostrarFormEditar"); //FORM EDITAR SERIE
     $r->addRoute("completarEdicion/:ID", "POST", "SerieController", "editarSerie"); //COMPLETAR EDICION SERIE
     $r->addRoute("verSerie/:ID", "GET", "SerieController", "mostrarSerie"); //MOSTRAR DATOS SERIE POR ID
+    $r->addRoute("buscarSerie/:ID", "POST", "SerieController", "mostrarHome");
     //Directores: seriesPorDirector, directores, agregar, eliminar, editar
     $r->addRoute("seriesDirector", "POST", "DirectorController", "mostrarSeriesPorDirector");
     $r->addRoute("directores", "GET", "DirectorController", "mostrarDirectores"); 
