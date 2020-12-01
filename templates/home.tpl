@@ -45,13 +45,6 @@
     -TABLA con las estadisticas del año 2020-->
     <aside class="estadisticas">
         <h2 class="tituloSecciones">Las mas elegidas en el 2020</h2>
-        <div class="formBuscarSerie">
-            <form action="buscarSerie" method="POST" class="formTabla2019">
-                <h2>Buscar serie</h2>        
-                <input type="text" name="serie" placeholder="Buscar serie">
-                <input id="btnBuscar" type="submit" value="Buscar">
-            </form>
-        </div>
         <div class="divTabla">
             <table class="tablaEstadisticas">
                 <thead>

@@ -16,6 +16,12 @@
     <header class="header">
         <a href="index.html"><img class="logoPagina" src="images/logoPagina.png" alt="Logo Pagina"></a>
         <img id="menuLogo" src="images/menu-logo.png" alt="Menu-logo" class="menuLogo">
+        <div class="divBuscarSerie">
+                        <form action="buscar" method="GET" class="formBuscarSerie">     
+                            <input type="text" name="busqueda" placeholder="Buscar por nombre, genero o director">
+                            <input class="btnBuscar" id="btnBuscar" type="submit" value="Buscar">
+                        </form>
+        </div>
         <nav>
             <ul id="barraNav" class="barraNavegacion">
                 <a href="home"><li>Inicio</li></a>

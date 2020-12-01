@@ -27,20 +27,22 @@ class SerieController{
     //Muestro el home
     function mostrarHome($params = null){
         if($params){
-            $pagina = $params[':ID'];
+            $pagina = $params[':ID']; //Guardo el numero de pagina
         }
-        //$this->checkLoggedIn();
         $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
         $series = $this->serieModel->getAllSeries();
         $directores = $this->directorModel->getAllDirectores();
     
+        //Guardo la cantidad de elementos por pagina y la cantidad de paginas que necesito
         $elementosPorPagina = 3;
         $cantPaginas = ceil(count($series)/$elementosPorPagina);
         if((!$params) || ($params[':ID'] <1) || ($params[':ID'] > $cantPaginas) || empty($params)){
             $pagina = 1;
         }
 
-        $inicio = ($pagina-1)*$elementosPorPagina;
+        //(1-1)*3 = 0 -> traigo del 0 al 3
+        //(2-1)*3 = 3 -> traigo del 3 al 6...
+        $inicio = ($pagina-1)*$elementosPorPagina; 
         $seriesPorLimite = $this->serieModel->getSeriesPorLimite($inicio, 3);
         $this->view->showHome($seriesPorLimite, $directores, $usuarioLogueado, $cantPaginas, $pagina);
     }
@@ -172,6 +174,14 @@ class SerieController{
 
         //Le digo al view que muestre el form de editar
         $this->view->formEditar($serie, $directores, $usuarioLogueado);
+    }
+
+    function busquedaSerie($params = null){
+        if(isset($_GET["busqueda"])){
+            $busqueda = $_GET["busqueda"];
+        }
+        $series = $this->serieModel->getSeriesPorBusqueda($busqueda);
+        $this->view->mostrarBusqueda($series);
     }
 
 }

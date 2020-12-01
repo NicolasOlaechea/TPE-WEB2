@@ -59,4 +59,9 @@ class SerieView {
         $smarty->display('templates/editar.tpl'); // muestro el template 
     }
     
+    function mostrarBusqueda($series){
+        $smarty = new Smarty();
+        $smarty->assign('series', $series);
+        $smarty->display('templates/busquedaSerie.tpl');
+    }
 }
