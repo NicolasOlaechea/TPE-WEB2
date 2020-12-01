@@ -482,6 +482,8 @@ form.formTabla2019 button {
 
 .divComentarios ul li {
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .infoDivSerie ul li {
@@ -850,6 +852,7 @@ form.formTabla2019 button {
 
     .formRegistro {
         width: 60%;
+        padding: 0 0 20px 0;
     }
 
     .divCaptcha{

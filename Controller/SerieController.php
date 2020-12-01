@@ -49,14 +49,14 @@ class SerieController{
 
     //Muestro la seccion de peliculas
     function mostrarPeliculas(){
-        //$this->checkLoggedIn();
-        $this->view->showPeliculas();
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+        $this->view->showPeliculas($usuarioLogueado);
     }
 
     //Muestro la seccion de series
     function mostrarSeries(){
-        //$this->checkLoggedIn();
-        $this->view->showSeries();
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+        $this->view->showSeries($usuarioLogueado);
     }
 
     //SERIES (ITEM)------------------------------------------------------------
@@ -177,11 +177,12 @@ class SerieController{
     }
 
     function busquedaSerie($params = null){
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
         if(isset($_GET["busqueda"])){
             $busqueda = $_GET["busqueda"];
         }
         $series = $this->serieModel->getSeriesPorBusqueda($busqueda);
-        $this->view->mostrarBusqueda($series);
+        $this->view->mostrarBusqueda($series, $usuarioLogueado);
     }
 
 }

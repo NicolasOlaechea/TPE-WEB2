@@ -94,6 +94,8 @@ class DirectorController{
 
     //Muestro series por director
     function mostrarSeriesPorDirector($params=null){
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+
         //Le pido al model todos los directores
         $directores = $this->directorModel->getAllDirectores();
         
@@ -116,10 +118,12 @@ class DirectorController{
         $series = $this->serieModel->getSeriesPorDirector($id_director);
         
         //Le digo al view que muestre las series
-        $this->directorView->showSeriesPorDirector($series, $nombreDirector);
+        $this->directorView->showSeriesPorDirector($series, $nombreDirector, $usuarioLogueado);
     }
 
     function mostrarFormEditarDirector($params = null){
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+
         //Guardo el id que recibo por parametros
         $idDirector = $params[':ID'];
 
@@ -127,7 +131,7 @@ class DirectorController{
         $director = $this->directorModel->getDirector($idDirector);
 
         //Le digo al view que muestre el form de editar director
-        $this->directorView->formEditarDirector($director);
+        $this->directorView->formEditarDirector($director, $usuarioLogueado);
     }
 
 }

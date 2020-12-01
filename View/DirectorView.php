@@ -23,18 +23,20 @@ class DirectorView {
     }
 
     //Muestro lista de series de un director
-    function showSeriesPorDirector($series, $nombreDirector){
+    function showSeriesPorDirector($series, $nombreDirector, $usuarioLogueado){
         $smarty = new Smarty();
         $smarty->assign('series', $series);
         $smarty->assign('nombreDirector', $nombreDirector);
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->display('templates/seriesPorDirector.tpl'); // muestro el template 
     }
 
     //Muestro el form de editar director
-    function formEditarDirector($director){
+    function formEditarDirector($director, $usuarioLogueado){
         $this->autenticacionHelper->checkLoggedIn();
         $smarty = new Smarty();
         $smarty->assign('director', $director);
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->display('templates/editarDirector.tpl'); // muestro el template 
     }
 

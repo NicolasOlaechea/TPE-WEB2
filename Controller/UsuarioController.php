@@ -20,6 +20,8 @@ class UsuarioController{
 
     //Agrego usuario
     function agregarUsuario(){
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+        
         $existe = false;
         $usuarios = $this->usuarioModel->getUsuarios();
   
@@ -39,7 +41,7 @@ class UsuarioController{
             $this->usuarioModel->agregarUsuario($email, $hash);
             $this->verificarUsuario();    
         }else{
-            $this->usuarioView->showRegistro("Ya existe un usuario con el mismo email");
+            $this->usuarioView->showRegistro("Ya existe un usuario con el mismo email", $usuarioLogueado);
         }
         
     }
@@ -47,16 +49,19 @@ class UsuarioController{
     
     //Muestro la seccion del registro
     function mostrarRegistro(){
-        $this->usuarioView->showRegistro();
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+        $this->usuarioView->showRegistro("", $usuarioLogueado);
     }
 
     //Muestro el login
     function showLogin(){
-        $this->usuarioView->showLogin();
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+        $this->usuarioView->showLogin("", $usuarioLogueado);
     }
 
     //Verifico el usuario ingresado
     function verificarUsuario(){
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
         //Guardo los datos que ingresa el usuario
         if(isset($_POST["email"]) && isset($_POST["password"])){
             $email = $_POST["email"];
@@ -72,11 +77,11 @@ class UsuarioController{
                 
                 header("Location: ". BASE_URL . "home");
             }else{
-                $this->usuarioView->showLogin("Contraseña incorrecta");
+                $this->usuarioView->showLogin("Contraseña incorrecta", $usuarioLogueado);
             }
         }else{
             // No existe el user en la DB
-            $this->usuarioView->showLogin("El usuario no existe");
+            $this->usuarioView->showLogin("El usuario no existe", $usuarioLogueado);
         }
     }
 

@@ -92,7 +92,7 @@
             </nav>
         </div>
 
-    {if $usuarioLogueado != null}
+    {if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
         <div>
             <form action="agregar" method="POST" class="formTabla2019" enctype="multipart/form-data">
                 <h2>¡Agregar tu serie favorita a la tabla!</h2>        

@@ -17,19 +17,23 @@
         <a href="index.html"><img class="logoPagina" src="images/logoPagina.png" alt="Logo Pagina"></a>
         <img id="menuLogo" src="images/menu-logo.png" alt="Menu-logo" class="menuLogo">
         <div class="divBuscarSerie">
-                        <form action="buscar" method="GET" class="formBuscarSerie">     
-                            <input type="text" name="busqueda" placeholder="Buscar por nombre, genero o director">
-                            <input class="btnBuscar" id="btnBuscar" type="submit" value="Buscar">
-                        </form>
+            <form action="buscar" method="GET" class="formBuscarSerie">     
+                <input type="text" name="busqueda" placeholder="Buscar por nombre, genero o director">
+                <input class="btnBuscar" id="btnBuscar" type="submit" value="Buscar">
+            </form>
         </div>
         <nav>
             <ul id="barraNav" class="barraNavegacion">
                 <a href="home"><li>Inicio</li></a>
                 <a href="peliculas"><li>Peliculas</li></a>
                 <a href="series"><li>Series</li></a>
-                <a href="registro"><li>Registro</li></a>
-                <a href="login"><li>Login</li></a>
-                <a href="logout"><li>Logout</li></a>
+                {if !$usuarioLogueado}
+                    <a href="registro"><li>Registro</li></a>
+                    <a href="login"><li>Login</li></a>
+                {/if}
+                {if $usuarioLogueado}
+                    <a href="logout"><li>Logout</li></a>
+                {/if}
             </ul>
         </nav>
     </header>

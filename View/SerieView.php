@@ -27,16 +27,18 @@ class SerieView {
     }
 
     //Muestro la seccion peliculas
-    function showPeliculas(){
+    function showPeliculas($usuarioLogueado){
         // inicializo Smarty y asigno las variables para mostrar
         $smarty = new Smarty();
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->display('templates/peliculas.tpl'); // muestro el template
     }
 
     //Muestro la seccion series
-    function showSeries(){
+    function showSeries($usuarioLogueado){
         // inicializo Smarty y asigno las variables para mostrar
         $smarty = new Smarty();
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->display('templates/series.tpl'); // muestro el template
     }
 
@@ -59,9 +61,10 @@ class SerieView {
         $smarty->display('templates/editar.tpl'); // muestro el template 
     }
     
-    function mostrarBusqueda($series){
+    function mostrarBusqueda($series, $usuarioLogueado){
         $smarty = new Smarty();
         $smarty->assign('series', $series);
+        $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->display('templates/busquedaSerie.tpl');
     }
 }

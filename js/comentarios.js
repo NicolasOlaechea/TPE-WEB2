@@ -42,12 +42,21 @@ function mostrarComentarios(comentarios){
         promedio = suma/comentarios.length; //Calculo el promedio
     }
     
-    document.querySelector("#puntuacionPromedio").innerHTML = promedio.toFixed(1);
+    document.querySelector("#puntuacionPromedio").innerHTML = "★"+promedio.toFixed(1);
     for(let comentario of comentarios){
         if(comentario.id_serie == idSerie){
             //Creo un li(donde va el contenido del comentario)
             let li = document.createElement("li");
-            li.innerHTML = comentario.contenido + " - "+ comentario.puntaje + " - " + comentario.email;
+
+            let spanContenido = document.createElement("span");
+            spanContenido.innerHTML = "💬"+comentario.contenido;
+            let spanPuntaje = document.createElement("span");
+            spanPuntaje.innerHTML = "★"+comentario.puntaje;
+            let spanEmail = document.createElement("span");
+            spanEmail.innerHTML = "👤"+comentario.email;
+            li.appendChild(spanContenido);
+            li.appendChild(spanPuntaje);
+            li.appendChild(spanEmail);
             
             //Creo un boton eliminar
             let button = document.createElement("button");
