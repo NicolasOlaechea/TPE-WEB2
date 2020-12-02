@@ -37,7 +37,7 @@
         </tbody>
     </table>
     <div class="mensajeEliminarDirector">
-        <h4>*No se pueden eliminar usuarios que hayan hecho comentarios en una o mas series*</h3>
+        <h4>*Se eliminaran los comentarios creados por el usuario eliminado*</h3>
     </div>
 </div>
 

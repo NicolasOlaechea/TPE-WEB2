@@ -28,10 +28,10 @@ class DirectorController{
 
     //Muestro los directores
     function mostrarDirectores(){
-        //$this->checkLoggedIn();
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+
         //Le pido al model todos los directores
         $directores = $this->directorModel->getAllDirectores();
-        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
 
         //Le digo al view que muestre todos los directores
         $this->directorView->showDirectores($directores, $usuarioLogueado);
@@ -89,7 +89,6 @@ class DirectorController{
 
         //Le digo al model que edite el director con los datos anteriores
         $this->directorModel->editarDirector($director_id, $nombre_director, $edad, $nacionalidad);
-        header("Location: ". BASE_URL . "directores"); //No va
     }
 
     //Muestro series por director
@@ -109,7 +108,6 @@ class DirectorController{
         foreach($directores as $director){
             if($director->nombre_director == $nombreDirector){
                 $id_director = $director->id;
-                $nombreDirector = $director->nombre_director; //No va, ya lo obtengo antes
             }
         }
         

@@ -18,7 +18,7 @@
         <img id="menuLogo" src="images/menu-logo.png" alt="Menu-logo" class="menuLogo">
         <div class="divBuscarSerie">
             <form action="buscar" method="GET" class="formBuscarSerie">     
-                <input type="text" name="busqueda" placeholder="Buscar por nombre, genero o director">
+                <input type="text" name="busqueda" placeholder="Buscar serie por nombre, genero o director">
                 <input class="btnBuscar" id="btnBuscar" type="submit" value="Buscar">
             </form>
         </div>

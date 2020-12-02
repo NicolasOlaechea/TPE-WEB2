@@ -39,7 +39,7 @@ class UsuarioController{
         $hash = password_hash($password, PASSWORD_DEFAULT);
         if($existe == false){
             $this->usuarioModel->agregarUsuario($email, $hash);
-            $this->verificarUsuario();    
+            $this->verificarUsuario(); //Se loguea automaticamente    
         }else{
             $this->usuarioView->showRegistro("Ya existe un usuario con el mismo email", $usuarioLogueado);
         }
@@ -62,6 +62,7 @@ class UsuarioController{
     //Verifico el usuario ingresado
     function verificarUsuario(){
         $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+
         //Guardo los datos que ingresa el usuario
         if(isset($_POST["email"]) && isset($_POST["password"])){
             $email = $_POST["email"];
@@ -85,19 +86,21 @@ class UsuarioController{
         }
     }
 
-    //Cierro la sesion
+    //Cierro la sesion / Desloguearse
     function Logout(){
         session_start();
         session_destroy();
         header("Location: ".LOGIN);
     }
 
+    //Muestro la lista de usuarios
     function mostrarUsuarios(){
         $usuarios = $this->usuarioModel->getUsuarios();
         $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
         $this->usuarioView->showUsuarios($usuarios, $usuarioLogueado);
     }
 
+    //Cambio el rol de un usuario
     function cambiarRol($params = null){
         $idUsuario = $params[":ID"];
         $usuario = $this->usuarioModel->getUsuarioPorID($idUsuario);

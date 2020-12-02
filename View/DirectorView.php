@@ -19,7 +19,7 @@ class DirectorView {
         $smarty = new Smarty();
         $smarty->assign('directores', $directores);
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
-        $smarty->display('templates/directores.tpl'); // muestro el template 
+        $smarty->display('templates/directores.tpl');
     }
 
     //Muestro lista de series de un director
@@ -28,7 +28,7 @@ class DirectorView {
         $smarty->assign('series', $series);
         $smarty->assign('nombreDirector', $nombreDirector);
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
-        $smarty->display('templates/seriesPorDirector.tpl'); // muestro el template 
+        $smarty->display('templates/seriesPorDirector.tpl');
     }
 
     //Muestro el form de editar director
@@ -37,7 +37,7 @@ class DirectorView {
         $smarty = new Smarty();
         $smarty->assign('director', $director);
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
-        $smarty->display('templates/editarDirector.tpl'); // muestro el template 
+        $smarty->display('templates/editarDirector.tpl');
     }
 
 }

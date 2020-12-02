@@ -51,9 +51,10 @@ class UsuarioModel {
         header("Location: ".BASE_URL."usuarios");
     }
 
+    //Elimino un usuario por el id
     function eliminarUsuario($id){
         $db = $this->GetDBConnection();
-        $sentencia = $db->prepare("DELETE FROM usuario WHERE id=? ON DELETE CASCADE");
+        $sentencia = $db->prepare("DELETE FROM usuario WHERE id=?");
         $sentencia->execute(array($id));
         
         header("Location: ". BASE_URL . "usuarios");

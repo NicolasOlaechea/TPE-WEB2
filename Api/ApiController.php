@@ -4,6 +4,7 @@ require_once 'ApiView.php';
 
 abstract class ApiController{
 
+    //Atributos
     protected $model;
     protected $view;
     private $data;

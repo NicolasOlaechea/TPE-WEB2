@@ -23,7 +23,7 @@ class SerieView {
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
         $smarty->assign('cantPaginas', $cantPaginas);
         $smarty->assign('pagina', $pagina);
-        $smarty->display('templates/home.tpl'); // muestro el template   
+        $smarty->display('templates/home.tpl');  
     }
 
     //Muestro la seccion peliculas
@@ -31,7 +31,7 @@ class SerieView {
         // inicializo Smarty y asigno las variables para mostrar
         $smarty = new Smarty();
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
-        $smarty->display('templates/peliculas.tpl'); // muestro el template
+        $smarty->display('templates/peliculas.tpl');
     }
 
     //Muestro la seccion series
@@ -39,7 +39,7 @@ class SerieView {
         // inicializo Smarty y asigno las variables para mostrar
         $smarty = new Smarty();
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
-        $smarty->display('templates/series.tpl'); // muestro el template
+        $smarty->display('templates/series.tpl');
     }
 
     //Muestro los datos de una serie
@@ -48,7 +48,7 @@ class SerieView {
         $smarty->assign('serie', $serie);
         $smarty->assign('puntajes', $puntajesDisponibles);
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
-        $smarty->display('templates/serie.tpl'); // muestro el template 
+        $smarty->display('templates/serie.tpl');
     }
 
     //Muestro el form de editar serie
@@ -58,9 +58,10 @@ class SerieView {
         $smarty->assign('serie', $serie);
         $smarty->assign('directores', $directores);
         $smarty->assign('usuarioLogueado', $usuarioLogueado);
-        $smarty->display('templates/editar.tpl'); // muestro el template 
+        $smarty->display('templates/editar.tpl'); 
     }
     
+    //Muestro la busqueda avanzada
     function mostrarBusqueda($series, $usuarioLogueado){
         $smarty = new Smarty();
         $smarty->assign('series', $series);

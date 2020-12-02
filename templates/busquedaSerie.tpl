@@ -20,7 +20,11 @@
                             </td>
                             <td>{$serie->nombre_serie}</td>
                             <td>{$serie->genero}</td>
-                            <td>{$serie->nombre_director}</td>  
+                            <td>{$serie->nombre_director}</td>
+                            {if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
+                                <td><button class="btnEliminar"><a href="eliminar/{$serie->id}">Eliminar</a></button></td>
+                                <td><button class="btnEditar"><a href="editar/{$serie->id}">Editar</a></button></td>
+                            {/if}  
                             <td><a class="btnVerMas" href="verSerie/{$serie->id}">Ver Mas</a></td>
                         </tr>
                     {/foreach}

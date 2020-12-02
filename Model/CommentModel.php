@@ -12,7 +12,7 @@ class CommentModel{
         $db = $this->GetDBConnection();
         $sentencia = $db->prepare("SELECT `comentario`.`id`, `comentario`.`contenido`, `comentario`.`puntaje`, `comentario`.`id_serie`, `comentario`.`id_usuario`, `serie`.`nombre_serie`, `usuario`.`email` FROM `comentario` INNER JOIN `serie` ON `comentario`.`id_serie` = `serie`.`id` INNER JOIN `usuario` ON `comentario`.`id_usuario` = `usuario`.`id`  ORDER BY `comentario`.`id`");
         $sentencia->execute();
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ); //Retorno los comentarios
     }
     
     //Agrego un comentario a la base de datos
@@ -20,7 +20,7 @@ class CommentModel{
         $db = $this->GetDBConnection();
         $sentencia = $db->prepare("INSERT INTO comentario(contenido, puntaje, id_serie, id_usuario) VALUES(?,?,?,?)");
         $sentencia->execute(array($contenido, $puntaje, $id_serie, $id_usuario));
-        return $db->lastInsertId();
+        return $db->lastInsertId(); //Retorno el id del comentario insertado
     }
 
     //Elimino un comentario de la base de datos
@@ -28,7 +28,7 @@ class CommentModel{
         $db = $this->GetDBConnection();
         $sentencia = $db->prepare("DELETE FROM comentario WHERE id=?");
         $sentencia->execute(array($id));
-        return $sentencia->rowCount();
+        return $sentencia->rowCount(); //Retorno el numero de filas afectadas
     }
 
     //Edito una serie de la base de datos
@@ -36,7 +36,7 @@ class CommentModel{
         $db = $this->GetDBConnection();
         $sentencia = $db->prepare("UPDATE comentario SET contenido=?, puntaje=?, id_serie=?, id_usuario=? WHERE id=?");
         $sentencia->execute(array($contenido, $puntaje, $id_serie, $id_usuario, $comentario_id));
-        return $sentencia->rowCount();
+        return $sentencia->rowCount(); //Retorno el numero de filas afectadas
     }
 
     //Obtengo un comentario por el id
@@ -44,7 +44,7 @@ class CommentModel{
         $db = $this->GetDBConnection();
         $sentencia = $db->prepare("SELECT `comentario`.`id`, `comentario`.`contenido`, `comentario`.`puntaje`, `comentario`.`id_serie`, `comentario`.`id_usuario`, `serie`.`nombre_serie`, `usuario`.`email` FROM `comentario` INNER JOIN `serie` ON `comentario`.`id_serie` = `serie`.`id` INNER JOIN `usuario` ON `comentario`.`id_usuario` = `usuario`.`id` WHERE `comentario`.`id`=?");
         $sentencia->execute(array($id));
-        return $sentencia->fetch(PDO::FETCH_OBJ);
+        return $sentencia->fetch(PDO::FETCH_OBJ); //Retorno el comentario
     }
 
     //Obtengo comentarios por serie
@@ -52,9 +52,7 @@ class CommentModel{
         $db = $this->GetDBConnection();
         $sentencia = $db->prepare("SELECT `comentario`.`id`, `comentario`.`contenido`, `comentario`.`puntaje`, `comentario`.`id_serie`, `usuario`.`email` FROM comentario INNER JOIN `usuario` ON `comentario`.`id_usuario` = `usuario`.`id` WHERE id_serie=? ORDER BY `comentario`.`id`");
         $sentencia->execute(array($id_serie));
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ); //Retorno los comentarios
     }
-
-
 
 }

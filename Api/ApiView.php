@@ -8,6 +8,7 @@ class ApiView{
         echo json_encode($data);
     }
 
+    //Creo todos los mensajes de los codigos de respuesta HTTP
     private function requestStatus($code) {
         $status = array(
           200 => "OK",
@@ -17,6 +18,5 @@ class ApiView{
         );
         return (isset($status[$code]))? $status[$code] : $status[500];
     }
-
 
 }

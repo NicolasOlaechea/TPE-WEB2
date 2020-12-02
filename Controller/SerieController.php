@@ -35,11 +35,13 @@ class SerieController{
     
         //Guardo la cantidad de elementos por pagina y la cantidad de paginas que necesito
         $elementosPorPagina = 3;
-        $cantPaginas = ceil(count($series)/$elementosPorPagina);
+        $cantPaginas = ceil(count($series)/$elementosPorPagina); //Redondea hacia arriba
+        //Si no existe params, es menor a 1, mayor a cantPaginas o viene vacio: pagina = 1
         if((!$params) || ($params[':ID'] <1) || ($params[':ID'] > $cantPaginas) || empty($params)){
             $pagina = 1;
         }
 
+        //Calculo el inicio y obtengo las series entre los limites que le paso
         //(1-1)*3 = 0 -> traigo del 0 al 3
         //(2-1)*3 = 3 -> traigo del 3 al 6...
         $inicio = ($pagina-1)*$elementosPorPagina; 
@@ -63,15 +65,24 @@ class SerieController{
 
     //Agrego una serie
     function agregarSerie(){
-        //Obtengo todas las series y todos los directores
-        $series = $this->serieModel->getAllSeries(); //No va, no lo uso
+        //Obtengo todos los directores
         $directores = $this->directorModel->getAllDirectores();
 
         $destino = null; //44:00 lo explica
         if(isset($_FILES['img'])){
-            $uploads = getcwd() . "/images/series";
+            //Concateno el directorio actual y la carpeta donde guardo las imagenes
+            //'C:\xampp\htdocs\TPE/images/series'
+            $uploads = getcwd() . "/images/series"; 
+
+            //Creo un fichero con un nombre único dentro de "uploads"
+            //'C:\xampp\htdocs\TPE\images\series\nombreUnico.tmp'
             $destino = tempnam($uploads, $_FILES['img']['name']);
+
+            //Mueve un archivo subido a una nueva ubicación
             move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+            
+            //Guardo el último componente de nombre de una ruta
+            //'nombreUnico.tmp'
             $destino = basename($destino);
         }
         //Guardo los datos que ingresa el usuario
@@ -96,11 +107,11 @@ class SerieController{
     //Elimino una serie
     function eliminarSerie($params = null){
         $this->autenticacionHelper->checkLoggedIn();
-        //Guardo el id que recibo por parametros y le digo al model que elimine
+        //Guardo el id que recibo por parametro y le digo al model que elimine
         $serie_id = $params[':ID'];
         $serie = $this->serieModel->getSerie($serie_id);
         
-        unlink('images/series/'.$serie->imagen);
+        unlink('images/series/'.$serie->imagen); //Elimino el .tmp del directorio
         $this->serieModel->eliminarSerie($serie_id);
     }
 
@@ -111,17 +122,19 @@ class SerieController{
         $directores = $this->directorModel->getAllDirectores();
         $serie_id = $params[':ID'];
         $serie = $this->serieModel->getSerie($serie_id);
-        unlink('images/series/'.$serie->imagen);
+        //Elimino el .tmp del directorio, asi no me quedan dos de la misma serie
+        unlink('images/series/'.$serie->imagen); 
 
-        $destino = null; //44:00 lo explica
+        $destino = null; 
         if(isset($_FILES['img'])){
-            if($_FILES['img']['name'] != ''){
+            if($_FILES['img']['name'] != ''){ //Si ingresaron una imagen...
                 $uploads = getcwd() . "/images/series";
                 $destino = tempnam($uploads, $_FILES['img']['name']);
                 move_uploaded_file($_FILES['img']['tmp_name'], $destino);
                 $destino = basename($destino);
             }
             
+            //Si no ingresaron una imagen le mando null y la serie queda sin imagen
             if($_FILES['img']['name'] == ''){
                 $destino = null;
             }
@@ -147,22 +160,24 @@ class SerieController{
 
     //Muestro una serie por el ID
     function mostrarSerie($params=null){
-        //Guardo el id que recibo por parametros
+        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
+
+        //Guardo el id que recibo por parametro
         $serie_id = $params[':ID'];
 
         //Le digo al model que me de la serie que coincida con el id anterior
         $serie = $this->serieModel->getSerie($serie_id);
+        //Creo un arreglo con los puntajes disponibles (de 1 a 5)
         $puntajesDisponibles = [];
         for($i=1; $i<=5; $i++){
             array_push($puntajesDisponibles, $i);
         }
-
-        $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
         
         //Le digo al view que muestre la serie
         $this->view->showSerie($serie, $puntajesDisponibles, $usuarioLogueado);
     }
 
+    //Muestro el form de editar serie
     function mostrarFormEditar($params = null){
         //Guardo el id que recibo por parametros
         $idSerie = $params[':ID'];
@@ -176,6 +191,7 @@ class SerieController{
         $this->view->formEditar($serie, $directores, $usuarioLogueado);
     }
 
+    //Busqueda avanzada de series por alguno de sus atributos
     function busquedaSerie($params = null){
         $usuarioLogueado = $this->autenticacionHelper->usuarioLogueado();
         if(isset($_GET["busqueda"])){

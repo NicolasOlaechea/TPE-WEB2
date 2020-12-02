@@ -15,6 +15,7 @@ class SerieModel {
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
+    //Obtengo las series que esten entre el limite que le paso
     function getSeriesPorLimite($inicio, $cantidad){
         $db = $this->GetDBConnection();
         $sentencia = $db->prepare("SELECT `serie`.`id`, `serie`.`nombre_serie`, `serie`.`genero`, `serie`.`imagen`, `serie`.`id_director`, `director`.`nombre_director`  FROM `serie` INNER JOIN `director` ON `serie`.`id_director` = `director`.`id` ORDER BY `serie`.`id` LIMIT $inicio, $cantidad");
