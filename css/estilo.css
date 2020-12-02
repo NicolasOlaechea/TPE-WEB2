@@ -229,6 +229,11 @@ form.formTabla2019 select {
     border: solid 1px white;
 }
 
+.divImagenSerie button {
+    display: block;
+    margin-left: 10px;
+}
+
 /*Boton Editar*/
 .formEditar {
     display: block;

@@ -201,4 +201,11 @@ class SerieController{
         $this->view->mostrarBusqueda($series, $usuarioLogueado);
     }
 
+    function eliminarImagen($params = null){
+        $idSerie = $params[":ID"];
+        $imagen = null;
+        $serie = $this->serieModel->getSerie($idSerie);
+        unlink('images/series/'.$serie->imagen); //Elimino el .tmp del directorio
+        $this->serieModel->eliminarImagen($imagen, $idSerie);
+    }
 }

@@ -78,4 +78,12 @@ class SerieModel {
         header("Location: ". BASE_URL . "home");
     }
 
+    //Eliminar imagen
+    function eliminarImagen($imagen, $serie_id){
+        $db = $this->GetDBConnection();
+        $sentencia = $db->prepare("UPDATE `serie` SET imagen=? WHERE id=?");
+        $sentencia->execute(array($imagen, $serie_id));
+
+        header("Location: ". BASE_URL . "home");
+    }
 }

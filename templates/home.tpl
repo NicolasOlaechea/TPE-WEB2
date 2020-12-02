@@ -60,7 +60,10 @@
                         <tr>
                             <td>
                                 {if $serie->imagen != null}
-                                    <img src="images/series/{$serie->imagen}" class="imgTablaSeries">
+                                    <div class="divImagenSerie">
+                                        <img src="images/series/{$serie->imagen}" class="imgTablaSeries">
+                                        <button class="btnEliminar"><a href="eliminarImagen/{$serie->id}">Eliminar</a></button>
+                                    </div>
                                 {/if}
                             </td>
                             <td>{$serie->nombre_serie}</td>

@@ -26,6 +26,7 @@
     $r->addRoute("completarEdicion/:ID", "POST", "SerieController", "editarSerie"); //COMPLETAR EDICION SERIE
     $r->addRoute("verSerie/:ID", "GET", "SerieController", "mostrarSerie"); //MOSTRAR DATOS SERIE POR ID
     $r->addRoute("buscar", "GET", "SerieController", "busquedaSerie");
+    $r->addRoute("eliminarImagen/:ID", "GET", "SerieController", "eliminarImagen");
     //Directores: seriesPorDirector, directores, agregar, eliminar, editar
     $r->addRoute("seriesDirector", "POST", "DirectorController", "mostrarSeriesPorDirector");
     $r->addRoute("directores", "GET", "DirectorController", "mostrarDirectores"); 
