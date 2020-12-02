@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2020 a las 00:45:01
+-- Tiempo de generación: 02-12-2020 a las 05:58:49
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -25,12 +25,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `comentario`
+--
+
+CREATE TABLE `comentario` (
+  `id` int(11) NOT NULL,
+  `contenido` varchar(500) NOT NULL,
+  `puntaje` int(5) NOT NULL,
+  `id_serie` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`id`, `contenido`, `puntaje`, `id_serie`, `id_usuario`) VALUES
+(27, 'La serie esta espectacular', 5, 16, 1),
+(33, 'La serie esta espectacular', 5, 16, 4),
+(36, 'Podria estar mejor', 3, 16, 1),
+(39, 'Buena', 4, 16, 1),
+(41, 'Buena', 4, 18, 14),
+(42, 'Me encanto la serie', 5, 16, 14),
+(53, 'Buena', 4, 16, 1),
+(54, 'La serie esta espectacular', 5, 16, 1),
+(57, 'Me encanto la serie', 4, 19, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `director`
 --
 
 CREATE TABLE `director` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+  `nombre_director` varchar(100) NOT NULL,
   `edad` int(11) NOT NULL,
   `nacionalidad` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -39,13 +68,11 @@ CREATE TABLE `director` (
 -- Volcado de datos para la tabla `director`
 --
 
-INSERT INTO `director` (`id`, `nombre`, `edad`, `nacionalidad`) VALUES
-(1, 'Nico', 21, 'Argentina'),
-(2, 'Florencia', 20, 'Argentina'),
-(3, 'Pepe', 162, 'Croacia'),
-(4, 'Sofia', 40, 'Peru'),
-(6, 'Maria', 29, 'Francia'),
-(11, 'Carlos Editado', 88, 'Argentina');
+INSERT INTO `director` (`id`, `nombre_director`, `edad`, `nacionalidad`) VALUES
+(14, 'Nicolas', 22, 'Argentina'),
+(15, 'Florencia', 21, 'Argentina'),
+(16, 'MariaEditada', 44, 'Suecia'),
+(18, 'Director11', 44, 'Argentina');
 
 -- --------------------------------------------------------
 
@@ -55,8 +82,9 @@ INSERT INTO `director` (`id`, `nombre`, `edad`, `nacionalidad`) VALUES
 
 CREATE TABLE `serie` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+  `nombre_serie` varchar(100) NOT NULL,
   `genero` varchar(100) NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
   `id_director` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -64,14 +92,19 @@ CREATE TABLE `serie` (
 -- Volcado de datos para la tabla `serie`
 --
 
-INSERT INTO `serie` (`id`, `nombre`, `genero`, `id_director`) VALUES
-(1, 'La casa de papel', 'Drama', 1),
-(2, 'Elite', 'Drama', 2),
-(3, 'El zorro', 'Drama', 3),
-(4, 'The Last Dance', 'Deporte', 1),
-(13, 'Serie editada', 'Entretenimiento', 1),
-(15, 'NN', 'Deporte', 1),
-(16, 'NNNNN', 'Deporte', 6);
+INSERT INTO `serie` (`id`, `nombre_serie`, `genero`, `imagen`, `id_director`) VALUES
+(16, 'La casa de papel', 'Drama', 'laC22FF.tmp', 14),
+(18, 'The last dance', 'Deporte', 'the64F0.tmp', 14),
+(19, 'Elite', 'Drama', 'eliB572.tmp', 15),
+(20, 'Vikings', 'Drama', 'vik44B8.tmp', 16),
+(21, 'Apache', 'Deporte', 'apaB62.tmp', 18),
+(22, 'Flash', 'Drama', 'flaE973.tmp', 15),
+(28, 'NNNNN', 'Cualquiera', 'the1314.tmp', 16),
+(29, 'Colony', 'Accion', 'col9F9B.tmp', 14),
+(30, 'Chernobyl', 'Drama', 'che514.tmp', 15),
+(31, 'b', 'Deporte', 'falCC4A.tmp', 16),
+(34, 'Serie editada2', 'Drama', 'theA942.tmp', 16),
+(35, 'uuuuuuuuuuuu', 'Cualquiera', 'fee44E8.tmp', 15);
 
 -- --------------------------------------------------------
 
@@ -91,11 +124,23 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `email`, `password`, `rol`) VALUES
-(1, 'nico@gmail.com', '$2y$10$t/Ql.rjxhA3gpLPeydUS.OeMawr01LOFdXEb7xHzmafwFEt88/Ya2', 'administrador');
+(1, 'nico@gmail.com', '$2y$10$t/Ql.rjxhA3gpLPeydUS.OeMawr01LOFdXEb7xHzmafwFEt88/Ya2', 'administrador'),
+(4, 'usuario@hotmail.com', '$2y$10$yljru2nWDbzy0k3SrxUyzOfz.0ZCap4/8yKybtI9rGhjMZl8YBVW2', 'administrador'),
+(10, 'UsuarioNuevo@hotmail.com', '$2y$10$z1YfEcUqZ6jDTCPJV119Fuh/EHRCjE8Z4V6TiFCVe2kuwWbul93A2', ''),
+(14, 'pepe@gmail.com', '$2y$10$QJGQaeKICFeiKcx2Tt/LM.w7Vrsb0iGFQEwP2tLwF8UYqW8v./aEW', ''),
+(17, 'q@gmail.com', '$2y$10$xkdeCbsyAPhXS9jTcuRGTeYpUHOPKO.L9gFiyVf47.WvxTwOy78SW', '');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_serie` (`id_serie`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `director`
@@ -121,26 +166,39 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
 -- AUTO_INCREMENT de la tabla `director`
 --
 ALTER TABLE `director`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `serie`
 --
 ALTER TABLE `serie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_serie`) REFERENCES `serie` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `serie`
