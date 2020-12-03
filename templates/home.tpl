@@ -62,7 +62,9 @@
                                 {if $serie->imagen != null}
                                     <div class="divImagenSerie">
                                         <img src="images/series/{$serie->imagen}" class="imgTablaSeries">
-                                        <button class="btnEliminar"><a href="eliminarImagen/{$serie->id}">Eliminar</a></button>
+                                        {if $usuarioLogueado != null && $usuarioLogueado->rol == "administrador"}
+                                            <button class="btnEliminar"><a href="eliminarImagen/{$serie->id}">Eliminar</a></button>
+                                        {/if}
                                     </div>
                                 {/if}
                             </td>
