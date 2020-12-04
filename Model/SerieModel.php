@@ -71,8 +71,8 @@ class SerieModel {
     //Obtengo series por busqueda del usuario
     function getSeriesPorBusqueda($busqueda){
         $db = $this->GetDBConnection();
-        $sentencia = $db->prepare("SELECT `serie`.`id`, `serie`.`nombre_serie`, `serie`.`genero`, `serie`.`imagen`, `serie`.`id_director`, `director`.`nombre_director` FROM `serie` INNER JOIN `director` ON `serie`.`id_director` = `director`.`id` WHERE nombre_serie LIKE '%$busqueda%' OR genero LIKE '%$busqueda%' OR nombre_director LIKE ?");
-        $sentencia->execute(["%".$busqueda."%"]);
+        $sentencia = $db->prepare("SELECT `serie`.`id`, `serie`.`nombre_serie`, `serie`.`genero`, `serie`.`imagen`, `serie`.`id_director`, `director`.`nombre_director` FROM `serie` INNER JOIN `director` ON `serie`.`id_director` = `director`.`id` WHERE nombre_serie LIKE ? OR genero LIKE ? OR nombre_director LIKE ?");
+        $sentencia->execute(["%".$busqueda."%", "%".$busqueda."%", "%".$busqueda."%"]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
 
         header("Location: ". BASE_URL . "home");

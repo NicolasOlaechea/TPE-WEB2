@@ -45,7 +45,7 @@ class SerieController{
         //(1-1)*3 = 0 -> traigo del 0 al 3
         //(2-1)*3 = 3 -> traigo del 3 al 6...
         $inicio = ($pagina-1)*$elementosPorPagina; 
-        $seriesPorLimite = $this->serieModel->getSeriesPorLimite($inicio, 3);
+        $seriesPorLimite = $this->serieModel->getSeriesPorLimite($inicio, $elementosPorPagina);
         $this->view->showHome($seriesPorLimite, $directores, $usuarioLogueado, $cantPaginas, $pagina);
     }
 
@@ -68,7 +68,7 @@ class SerieController{
         //Obtengo todos los directores
         $directores = $this->directorModel->getAllDirectores();
 
-        $destino = null; //44:00 lo explica
+        $destino = null; 
         if(isset($_FILES['img'])){
             //Concateno el directorio actual y la carpeta donde guardo las imagenes
             //'C:\xampp\htdocs\TPE/images/series'
